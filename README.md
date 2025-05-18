@@ -1,69 +1,34 @@
 
-# Port Scanner
+#🔍 Java Port Scanner
+A multithreaded Java port scanner that prioritizes scanning based on port likelihoods, detects basic service banners, and simulates a defender that blocks scans after repeated suspicious activity.
 
-This project is a simple **Port Scanner** written in Java. It scans a given IP address for open ports within the range of 1 to 65535. The scanner uses multi-threading to efficiently probe ports and provides a quick report of open ports.
+#🛠 Features
+Scans all 65,535 TCP ports using a probability-weighted approach.
 
-## Features
+Outputs HTML scan report (scan_report.html) with open ports and banners.
 
-- Scans all ports (1-65535) on a specified IP address.
-- Multi-threaded for faster execution.
-- Customizable timeout for port scans.
+Banner grabbing for open ports.
 
-## Requirements
+Simulated defender that blocks after scanning more than a threshold number of ports.
 
-- Java Development Kit (JDK) 8 or higher.
+Multithreaded scanning for high performance.
 
-## Installation
+#📄 Output
+After the scan:
+A file named scan_report.html is generated in the current directory.
+Example output in terminal:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/naveen-98/Port-Scanner.git
+Enter IP address to scan: 192.168.1.1
+Port 80 is open. Banner: HTTP/1.1 200 OK
+Port 22 is open. Banner: SSH-2.0-OpenSSH_8.4
+...
+Scan complete. Report generated: scan_report.html
 
-2. Navigate to the project directory:
-   ```bash
-   cd Port-Scanner
+#🧠 How It Works
+Probability Weights: Certain common ports (e.g., 22, 80, 443) are more likely to be scanned first.
 
-3. Compile the Java code:
-   ```bash
-   javac PortScanner.java
+Adaptive Learning: Each scan updates the probability of a port being open.
 
+Simulated Defender: Blocks scanning if more than DEFENDER_THRESHOLD ports are scanned (default: 10).
 
-# Usage
-
-1. Run the program:
-    ```bash
-   java PortScanner
-
-2. Input the IP address you want to scan when prompted.
-
-3. The program will output the open ports found on the given IP address.
-
-# Example
-
-Please input the ip address you would like to scan for open ports: 192.168.1.1
-
-22
-
-80
-
-443
-
-There are 3 open ports on host 192.168.1.1 (probed with a timeout of 200ms)
-
-## Demo
-
-Check out the demo video to see the port scanner in action.
-
-https://youtu.be/5VKJV_tnz_k?si=ipp9TXY91Ry5Tc_b
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a pull request or open an issue if you find any bugs or have suggestions for improvements.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
-## Author
-
-    N4viya98
+Concurrency: Uses a thread pool of 100 threads for parallel scanning.
